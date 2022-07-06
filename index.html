@@ -13,7 +13,7 @@
         <div class="sidebar">
             <h1>My Library</h1>
             <p>View the books you have!</p>
-            <button class="add-book">Click to add a book!
+            <button data-modal-target="#modal" class="add-book">Click to add a book!
             </button>
         </div>
         <div class="card-body">
@@ -42,13 +42,13 @@
                     <div class="user-author">
                         <p class="text-author-user">JK Rowling</p>
                     </div>
-                    <div class="user-title">
+                    <div class="user-pagecount">
                         <p class="text-pagecount-user">350</p>
                     </div>
-                    <div class="user-title">
+                    <div class="user-read">
                         <p class="text-read-user">Yes</p>
                     </div>
-                    <div class="user-title">
+                    <div class="user-liked">
                         <p class="text-liked-user">No</p>
                     </div>
                 </div>
@@ -65,5 +65,33 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="title">Add a Book</div>
+            <button data-close-button class="close-button">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+            <label for="bookName">Book's Title:</label>
+            <input type="text" name="book_name" id="bookName" placeholder="Harry Potter" required>
+            <label for="authorName">Author's Name:</label>
+            <input type="text" name="author_name" id="authorName" placeholder="JK Rowling" required>
+            <label for="pagecount">Page Number:</label>
+            <input type="number" name="page_count" id="pagecount" placeholder="350 (0 if unknown)" required>
+            <label for="bookRead">Have you Read it?</label>
+            <select name="read" id="bookRead">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <label for="bookLiked">Did you like it?</label>
+            <select name="liked" id="bookLiked">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <button id="submitBook">Submit</button>
+        </div>
+    </div>
+    <div id="overlay"></div>
 </body>
 </html>
