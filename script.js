@@ -109,11 +109,11 @@ function addTemplate () {
                 <div class="bottom-box">
                     <div class="button-box">
                         <p>Toggle</p>
-                        <button>Read</button>
-                        <button>Liked</button>
+                        <button class="button-read">Read</button>
+                        <button class="button-liked">Liked</button>
                     </div>
                     <div class="delete-box">
-                        <button>X</button>
+                        <button class="button-delete">X</button>
                     </div>
                 </div>
                 </div>
@@ -131,6 +131,12 @@ function addTemplate () {
         addRead.innerHTML = myLibrary[i].read
         addLiked.innerHTML = myLibrary[i].liked
         myLibrary[i].isDisplayed = true
+        const btnRead = myTemplate.querySelector('.button-read')
+        const btnLiked = myTemplate.querySelector('.button-liked')
+        const btnDelete = myTemplate.querySelector('.button-delete')
+        btnRead.setAttribute('id', myLibrary[i].title)
+        btnLiked.setAttribute('id', myLibrary[i].title)
+        btnDelete.setAttribute('id', myLibrary[i].title)
     }
 }
 
