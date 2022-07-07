@@ -47,6 +47,40 @@ book submission done
 constructor done
 form clearing done
 
-loop array to add items
+loop array to add items  done
 wire up read/liked
 add clear functionality
+
+create the element
+<!-- element.isDisplayed = false (add this to the object!) -->
+
+create function (when form submitted)
+
+select card-body
+for i=0, i <array.length i++ 
+if element.isDisplayed return
+create stuff
+append stuff
+document.isdisplayed = true
+
+card1234qwerpppp
+
+card1qp
+2wp
+3ep
+4rp
+
+ add classlist, add attribute, add content
+
+
+function delete (title) {
+    mylibrary[title].delete
+    
+
+}
+delete button [id = title]
+delete button add event listener ("click", () => {
+    document.getElementbyID(title)
+    const includesBook = myLibrary.includes(title)
+    delete(title)
+})
