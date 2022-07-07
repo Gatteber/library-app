@@ -75,7 +75,7 @@ card1qp
 
 function delete (title) {
     mylibrary[title].delete
-    
+
 
 }
 delete button [id = title]
@@ -84,3 +84,8 @@ delete button add event listener ("click", () => {
     const includesBook = myLibrary.includes(title)
     delete(title)
 })
+
+just re-render the entire thing lmao
+add a new item -> re-render 
+
+get the id of the parent and delete it? why cant you do this with the variable from the loop?

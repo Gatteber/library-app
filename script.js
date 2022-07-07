@@ -63,7 +63,6 @@ bookSubmission.addEventListener("click", () => {
     document.getElementById('pagecount').value='';
     closeModal(modal)
     addTemplate()
-    //printBook()
 })
 
 function addTemplate () {
@@ -134,9 +133,25 @@ function addTemplate () {
         const btnRead = myTemplate.querySelector('.button-read')
         const btnLiked = myTemplate.querySelector('.button-liked')
         const btnDelete = myTemplate.querySelector('.button-delete')
-        btnRead.setAttribute('id', myLibrary[i].title)
-        btnLiked.setAttribute('id', myLibrary[i].title)
-        btnDelete.setAttribute('id', myLibrary[i].title)
+        const assignIndex = myLibrary.indexOf(myLibrary[i])
+        btnRead.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
+        btnLiked.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
+        btnDelete.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
+        btnDelete.addEventListener("click", () => {
+            console.log("I was clicked!" + myLibrary[assignIndex].title)
+            const deleteItem = document.querySelector('.card-body')
+            const remakeBody = document.querySelector('.container')
+            const newBody = document.createElement('div')
+            remakeBody.appendChild(newBody)
+            newBody.classList.add("card-body")
+            myLibrary.splice(assignIndex)
+            deleteItem.remove()
+            for (i=0; i<myLibrary.length; i++) {
+                myLibrary[i].isDisplayed = false;
+            }
+            addTemplate()
+        })
+        // const test = myLibrary.indexOf(myLibrary[i])
     }
 }
 
@@ -147,7 +162,13 @@ function elementFromHtml(html) {
     return template.content.firstElementChild;
 }
 
+// const testDeleteButtons = document.querySelectorAll('.button-delete')
 
+// testDeleteButtons.forEach(button => {
+//     button.addEventListener("click", () => {
+//         console.log("I was clicked!")
+//     })
+// })
 
 
 
