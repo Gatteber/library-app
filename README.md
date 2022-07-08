@@ -91,8 +91,8 @@ add a new item -> re-render
 get the id of the parent and delete it? why cant you do this with the variable from the loop?
 
 New plan:
-Remake the card system. No inlaid divs with p tags (waste of resources)
-Use a form to submit, and actually get the results from it (you know how to do this)
+Remake the card system. No inlaid divs with p tags (waste of resources)   DONE
+Use a form to submit, and actually get the results from it (you know how to do this)   DONE
 on form submit, get the data, run a function call to make parent divs
 
 make a render function to add data

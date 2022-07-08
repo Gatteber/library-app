@@ -42,6 +42,27 @@ function closeModal (modal) {
     overlay.classList.remove('active')
 }
 
+
+//form submission
+const getForm = document.getElementById('book-form')
+
+getForm.addEventListener("submit", (event) => {
+    event.preventDefault() //prevent form autosubmit
+
+    const bookTitle = document.getElementById('bookName').value
+    const bookAuthor = document.getElementById('bookAuthor').value
+    const pageCount = document.getElementById('pageCount').value
+    const bookRead = document.getElementById('bookRead').value
+    const bookLiked = document.getElementById('bookLiked').value
+
+    const createBook = new Book(bookTitle, bookAuthor, pageCount, bookRead, bookLiked)
+    myLibrary.push(createBook)
+
+    //renderLib()
+    getForm.reset()
+    closeModal(modal)
+})
+
 //form submission
 const bookSubmission = document.getElementById('submitBook')
 const submissionTitle = document.getElementById('bookName')

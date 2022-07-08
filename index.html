@@ -17,50 +17,16 @@
             </button>
         </div>
         <div class="card-body">
-            <div class="card">
-                <div class="info">
-                    <div class="info-title">
-                        <p class="text-title">Title:</p>
-                    </div>
-                    <div class="info-author">
-                        <p class="text-author">Author:</p>
-                    </div>
-                    <div class="info-pagecount">
-                        <p class="text-pagecount">Page count:</p>
-                    </div>
-                    <div class="info-read">
-                        <p class="text-read">Read?</p>
-                    </div>
-                    <div class="info-liked">
-                        <p class="text-liked">Liked?</p>
-                    </div>
-                </div>
-                <div class="user-response">
-                    <div class="user-title">
-                        <p class="text-title-user">Harry Potter</p>
-                    </div>
-                    <div class="user-author">
-                        <p class="text-author-user">JK Rowling</p>
-                    </div>
-                    <div class="user-pagecount">
-                        <p class="text-pagecount-user">350</p>
-                    </div>
-                    <div class="user-read">
-                        <p class="text-read-user">Yes</p>
-                    </div>
-                    <div class="user-liked">
-                        <p class="text-liked-user">No</p>
-                    </div>
-                </div>
-                <div class="bottom-box">
-                    <div class="button-box">
-                        <p>Toggle</p>
-                        <button>Read</button>
-                        <button>Liked</button>
-                    </div>
-                    <div class="delete-box">
-                        <button>X</button>
-                    </div>
+            <div class="cardspace">
+                <div class="new-card">
+                    <div class="card-title">Title: Harry Potter</div>
+                    <div class="card-author">Author: JK Rowling</div>
+                    <div class="card-pagecount">Page Count: 350</div>
+                    <div class="card-read">Read? Yes</div>
+                    <div class="card-liked">Liked? No</div>
+                    <button class="toggle-read">Toggle Read</button>
+                    <button class="toggle-liked">Toggle Liked</button>
+                    <button class="delete">&times;</button>
                 </div>
             </div>
         </div>
@@ -69,27 +35,26 @@
         <div class="modal-header">
             <div class="title">Add a Book</div>
             <button data-close-button class="close-button">&times;</button>
-
         </div>
-
-        <div class="modal-body">
-            <label for="bookName">Book's Title:</label>
-            <input type="text" name="book_name" id="bookName" placeholder="Harry Potter" required>
-            <label for="authorName">Author's Name:</label>
-            <input type="text" name="author_name" id="authorName" placeholder="JK Rowling" required>
-            <label for="pagecount">Page Number:</label>
-            <input type="number" name="page_count" id="pagecount" placeholder="350 (0 if unknown)" required>
-            <label for="bookRead">Have you Read it?</label>
-            <select name="read" id="bookRead">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+        <form action="#" method="post" id="book-form" class="book-form-style">
+            <label for="bookName">Title:</label>
+            <input type="text" name="book_name" id="bookName" placeholder="Harry Potter"  required>
+            <label for="bookAuthor">Author:</label>
+            <input type="text" name="book_title" id="bookAuthor" placeholder="JK Rowling" required>
+            <label for="pageCount">Page Count:</label>
+            <input type="number" name="book_pagecount" id="pageCount" placeholder="0 if unknown" required>
+            <label for="bookRead">I've read it</label>
+            <select name="book_read" id="bookRead">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
             </select>
-            <label for="bookLiked">Did you like it?</label>
-            <select name="liked" id="bookLiked">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+            <label for="bookLiked">I liked it</label>
+            <select name="book_liked" id="bookLiked">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
             </select>
-            <button id="submitBook">Submit</button>
+            <button type="submit" id="submit">Add your Book!</button>
+        </form>
         </div>
     </div>
     <div id="overlay"></div>
