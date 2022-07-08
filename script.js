@@ -1,5 +1,29 @@
 
-let myLibrary = [];
+let myLibrary = [{
+    author: "JK Rowling",
+    isDisplayed: false,
+    liked: "No",
+    pageCount: "350",
+    read: "Yes",
+    title: "Harry Potter",
+},
+{
+    author: "JRR Tolkein",
+    isDisplayed: false,
+    liked: "No",
+    pageCount: "350",
+    read: "Yes",
+    title: "Lord of the Rings",
+},
+{
+    author: "Bronte",
+    isDisplayed: false,
+    liked: "No",
+    pageCount: "350",
+    read: "Yes",
+    title: "Wuthering Heights",
+}
+];
 
 //book constructor
 function Book(title, author, pageCount, read, liked) {
@@ -62,6 +86,29 @@ getForm.addEventListener("submit", (event) => {
     getForm.reset()
     closeModal(modal)
 })
+
+//render
+function renderLib() {
+    for(i=0; i < myLibrary.length; i++) {
+        //make new cards
+        const getBody = document.querySelector('.card-body')
+        const newCard = document.createElement('div')
+        getBody.appendChild(newCard)
+        newCard.classList.add('cardspace')
+        console.log("under construction")
+    }
+        const renderBooks = document.querySelectorAll('.cardspace')
+        renderBooks.forEach(book => {
+            const renderTitle = document.createElement('div')
+            book.appendChild(renderTitle)
+            renderTitle.classList.add('card-title')
+            //renderTitle.innerHTML = myLibrary[book].value
+
+            
+        })
+}
+
+renderLib()
 
 //form submission
 const bookSubmission = document.getElementById('submitBook')
