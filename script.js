@@ -82,30 +82,76 @@ getForm.addEventListener("submit", (event) => {
     const createBook = new Book(bookTitle, bookAuthor, pageCount, bookRead, bookLiked)
     myLibrary.push(createBook)
 
-    //renderLib()
     getForm.reset()
     closeModal(modal)
+    renderLib()
 })
 
 //render
 function renderLib() {
     for(i=0; i < myLibrary.length; i++) {
-        //make new cards
+        //reset html
         const getBody = document.querySelector('.card-body')
-        const newCard = document.createElement('div')
-        getBody.appendChild(newCard)
-        newCard.classList.add('cardspace')
-        console.log("under construction")
+        getBody.innerHTML = null
     }
-        const renderBooks = document.querySelectorAll('.cardspace')
-        renderBooks.forEach(book => {
-            const renderTitle = document.createElement('div')
-            book.appendChild(renderTitle)
-            renderTitle.classList.add('card-title')
-            //renderTitle.innerHTML = myLibrary[book].value
 
-            
-        })
+    myLibrary.map((book, index) => {
+        //add card body and add new card
+        const getBody = document.querySelector('.card-body')
+        const renderCard = document.createElement('div')
+        renderCard.classList.add('new-card')
+        renderCard.setAttribute("id", `${index}`)
+        getBody.appendChild(renderCard)
+
+        //select new card and add information
+        const getCard = document.getElementById(`${index}`)
+
+        //title
+        const renderTitle = document.createElement('div')
+        getCard.appendChild(renderTitle)
+        renderTitle.classList.add('card-title')
+        renderTitle.innerHTML = `Title: ${book.title}`
+
+        //author
+        const renderAuthor = document.createElement('div')
+        getCard.appendChild(renderAuthor)
+        renderAuthor.classList.add('card-author')
+        renderAuthor.innerHTML = `Author: ${book.author}`
+
+        //pagecount
+        const renderPagecount = document.createElement('div')
+        getCard.appendChild(renderPagecount)
+        renderPagecount.classList.add('card-pagecount')
+        renderPagecount.innerHTML = `Page Count: ${book.pageCount}`
+
+        //read
+        const renderRead = document.createElement('div')
+        getCard.appendChild(renderRead)
+        renderRead.classList.add('card-read')
+        renderRead.innerHTML = `Read? ${book.read}`
+
+        //liked
+        const renderLiked = document.createElement('div')
+        getCard.appendChild(renderLiked)
+        renderLiked.classList.add('card-liked')
+        renderLiked.innerHTML = `Liked? ${book.liked}`
+
+        //buttons
+        const readToggle = document.createElement('button')
+        getCard.appendChild(readToggle)
+        readToggle.classList.add('toggle-read')
+        readToggle.innerHTML = "Toggle Read"
+
+        const likedToggle = document.createElement('button')
+        getCard.appendChild(likedToggle)
+        likedToggle.classList.add('toggle-liked')
+        likedToggle.innerHTML = "Toggle Liked"
+
+        const deleteToggle = document.createElement('button')
+        getCard.appendChild(deleteToggle)
+        deleteToggle.classList.add('delete')
+        deleteToggle.innerHTML = "&times;"
+    })
 }
 
 renderLib()
