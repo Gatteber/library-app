@@ -1,29 +1,5 @@
 
-let myLibrary = [{
-    author: "JK Rowling",
-    isDisplayed: false,
-    liked: "No",
-    pageCount: "350",
-    read: "Yes",
-    title: "Harry Potter",
-},
-{
-    author: "JRR Tolkein",
-    isDisplayed: false,
-    liked: "No",
-    pageCount: "350",
-    read: "Yes",
-    title: "Lord of the Rings",
-},
-{
-    author: "Bronte",
-    isDisplayed: false,
-    liked: "No",
-    pageCount: "350",
-    read: "Yes",
-    title: "Wuthering Heights",
-}
-];
+ let myLibrary = [];
 
 //book constructor
 function Book(title, author, pageCount, read, liked) {
@@ -31,8 +7,15 @@ function Book(title, author, pageCount, read, liked) {
     this.author = author,
     this.pageCount = pageCount,
     this.read = read,
-    this.liked = liked,
-    this.isDisplayed = false
+    this.liked = liked
+}
+
+Book.prototype.isRead = function() {
+    return this.read
+}
+
+Book.prototype.isLiked = function() {
+    return this.liked
 }
 
 //modal open/close
@@ -90,7 +73,7 @@ getForm.addEventListener("submit", (event) => {
 //render
 function renderLib() {
     for(i=0; i < myLibrary.length; i++) {
-        //reset html
+        //reset html cardspace -- probably un-necessary
         const getBody = document.querySelector('.card-body')
         getBody.innerHTML = null
     }
@@ -141,154 +124,159 @@ function renderLib() {
         getCard.appendChild(readToggle)
         readToggle.classList.add('toggle-read')
         readToggle.innerHTML = "Toggle Read"
+        readToggle.addEventListener("click", () => {
+            const toggle = book.isRead()
+            if (toggle == "Yes") book.read = "No"
+            if (toggle == "No") book.read = "Yes"
+            renderLib()
+        })
 
         const likedToggle = document.createElement('button')
         getCard.appendChild(likedToggle)
         likedToggle.classList.add('toggle-liked')
         likedToggle.innerHTML = "Toggle Liked"
+        likedToggle.addEventListener("click", () => {
+            const toggleTwo = book.isLiked()
+            if (toggleTwo == "Yes") book.liked = "No"
+            if (toggleTwo == "No") book.liked = "Yes"
+            renderLib()
+        })
 
         const deleteToggle = document.createElement('button')
         getCard.appendChild(deleteToggle)
         deleteToggle.classList.add('delete')
         deleteToggle.innerHTML = "&times;"
+        deleteToggle.addEventListener("click", () => {
+            myLibrary.splice(`${index}`, 1)
+            getBody.innerHTML = null
+            renderLib()
+        })
     })
 }
 
 renderLib()
 
-//form submission
-const bookSubmission = document.getElementById('submitBook')
-const submissionTitle = document.getElementById('bookName')
-const submissionAuthor = document.getElementById('authorName')
-const submissionPageCount = document.getElementById('pagecount')
-const submissionRead = document.getElementById('bookRead')
-const submissionLiked = document.getElementById('bookLiked')
-bookSubmission.addEventListener("click", () => {
-    const createBook = new Book(submissionTitle.value,submissionAuthor.value, submissionPageCount.value, submissionRead.value, submissionLiked.value)
-    myLibrary.push(createBook)
-    //console.log(myLibrary[0])
-    const getCardBody = document.querySelector('.card-body')
-    const newBook = document.createElement('div')
-    getCardBody.appendChild(newBook)
-    newBook.setAttribute('id', submissionTitle.value)
-    //reset form (no submission, all data stored locally)
-    document.getElementById('bookName').value='';
-    document.getElementById('authorName').value='';
-    document.getElementById('pagecount').value='';
-    closeModal(modal)
-    addTemplate()
-})
-
-function addTemplate () {
-    //loop library, add new template for each
-    for (i=0; i < myLibrary.length; i++) {
-        if (myLibrary[i].isDisplayed == true) continue
-        const myTemplate = elementFromHtml(`
-                <div class="card">
-                <div class="info">
-                    <div class="info-title">
-                        <p class="text-title">Title:</p>
-                    </div>
-                    <div class="info-author">
-                        <p class="text-author">Author:</p>
-                    </div>
-                    <div class="info-pagecount">
-                        <p class="text-pagecount">Page count:</p>
-                    </div>
-                    <div class="info-read">
-                        <p class="text-read">Read?</p>
-                    </div>
-                    <div class="info-liked">
-                        <p class="text-liked">Liked?</p>
-                    </div>
-                </div>
-                <div class="user-response">
-                    <div class="user-title">
-                        <p class="text-title-user"></p>
-                    </div>
-                    <div class="user-author">
-                        <p class="text-author-user"></p>
-                    </div>
-                    <div class="user-pagecount">
-                        <p class="text-pagecount-user"></p>
-                    </div>
-                    <div class="user-read">
-                        <p class="text-read-user"></p>
-                    </div>
-                    <div class="user-liked">
-                        <p class="text-liked-user"></p>
-                    </div>
-                </div>
-                <div class="bottom-box">
-                    <div class="button-box">
-                        <p>Toggle</p>
-                        <button class="button-read">Read</button>
-                        <button class="button-liked">Liked</button>
-                    </div>
-                    <div class="delete-box">
-                        <button class="button-delete">X</button>
-                    </div>
-                </div>
-                </div>
-                `);
-        const addNewBook = document.getElementById(myLibrary[i].title)
-        addNewBook.appendChild(myTemplate)
-        const addTitle = myTemplate.querySelector('.text-title-user')
-        const addAuthor = myTemplate.querySelector('.text-author-user')
-        const addPagecount = myTemplate.querySelector('.text-pagecount-user')
-        const addRead = myTemplate.querySelector('.text-read-user')
-        const addLiked = myTemplate.querySelector('.text-liked-user')
-        addTitle.innerHTML = myLibrary[i].title
-        addAuthor.innerHTML = myLibrary[i].author
-        addPagecount.innerHTML = myLibrary[i].pageCount
-        addRead.innerHTML = myLibrary[i].read
-        addLiked.innerHTML = myLibrary[i].liked
-        myLibrary[i].isDisplayed = true
-        const btnRead = myTemplate.querySelector('.button-read')
-        const btnLiked = myTemplate.querySelector('.button-liked')
-        const btnDelete = myTemplate.querySelector('.button-delete')
-        const assignIndex = myLibrary.indexOf(myLibrary[i])
-        btnRead.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
-        btnLiked.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
-        btnDelete.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
-        btnDelete.addEventListener("click", () => {
-            console.log("I was clicked!" + myLibrary[assignIndex].title)
-            const deleteItem = document.querySelector('.card-body')
-            const remakeBody = document.querySelector('.container')
-            const newBody = document.createElement('div')
-            remakeBody.appendChild(newBody)
-            newBody.classList.add("card-body")
-            myLibrary.splice(assignIndex)
-            deleteItem.remove()
-            for (i=0; i<myLibrary.length; i++) {
-                myLibrary[i].isDisplayed = false;
-            }
-            addTemplate()
-        })
-        // const test = myLibrary.indexOf(myLibrary[i])
-    }
-}
+// UNUSED CODE
 
 //take in pre-prepared html
-function elementFromHtml(html) {
-    const template = document.createElement("template");
-    template.innerHTML = html.trim();
-    return template.content.firstElementChild;
-}
+// function elementFromHtml(html) {
+//     const template = document.createElement("template");
+//     template.innerHTML = html.trim();
+//     return template.content.firstElementChild;
+// }
 
-// const testDeleteButtons = document.querySelectorAll('.button-delete')
 
-// testDeleteButtons.forEach(button => {
-//     button.addEventListener("click", () => {
-//         console.log("I was clicked!")
-//     })
+// //form submission
+// const bookSubmission = document.getElementById('submitBook')
+// const submissionTitle = document.getElementById('bookName')
+// const submissionAuthor = document.getElementById('authorName')
+// const submissionPageCount = document.getElementById('pagecount')
+// const submissionRead = document.getElementById('bookRead')
+// const submissionLiked = document.getElementById('bookLiked')
+// bookSubmission.addEventListener("click", () => {
+//     const createBook = new Book(submissionTitle.value,submissionAuthor.value, submissionPageCount.value, submissionRead.value, submissionLiked.value)
+//     myLibrary.push(createBook)
+//     //console.log(myLibrary[0])
+//     const getCardBody = document.querySelector('.card-body')
+//     const newBook = document.createElement('div')
+//     getCardBody.appendChild(newBook)
+//     newBook.setAttribute('id', submissionTitle.value)
+//     //reset form (no submission, all data stored locally)
+//     document.getElementById('bookName').value='';
+//     document.getElementById('authorName').value='';
+//     document.getElementById('pagecount').value='';
+//     closeModal(modal)
+//     addTemplate()
 // })
 
-
-
-
-
-// UNUSED CODE
+// function addTemplate () {
+//     //loop library, add new template for each
+//     for (i=0; i < myLibrary.length; i++) {
+//         if (myLibrary[i].isDisplayed == true) continue
+//         const myTemplate = elementFromHtml(`
+//                 <div class="card">
+//                 <div class="info">
+//                     <div class="info-title">
+//                         <p class="text-title">Title:</p>
+//                     </div>
+//                     <div class="info-author">
+//                         <p class="text-author">Author:</p>
+//                     </div>
+//                     <div class="info-pagecount">
+//                         <p class="text-pagecount">Page count:</p>
+//                     </div>
+//                     <div class="info-read">
+//                         <p class="text-read">Read?</p>
+//                     </div>
+//                     <div class="info-liked">
+//                         <p class="text-liked">Liked?</p>
+//                     </div>
+//                 </div>
+//                 <div class="user-response">
+//                     <div class="user-title">
+//                         <p class="text-title-user"></p>
+//                     </div>
+//                     <div class="user-author">
+//                         <p class="text-author-user"></p>
+//                     </div>
+//                     <div class="user-pagecount">
+//                         <p class="text-pagecount-user"></p>
+//                     </div>
+//                     <div class="user-read">
+//                         <p class="text-read-user"></p>
+//                     </div>
+//                     <div class="user-liked">
+//                         <p class="text-liked-user"></p>
+//                     </div>
+//                 </div>
+//                 <div class="bottom-box">
+//                     <div class="button-box">
+//                         <p>Toggle</p>
+//                         <button class="button-read">Read</button>
+//                         <button class="button-liked">Liked</button>
+//                     </div>
+//                     <div class="delete-box">
+//                         <button class="button-delete">X</button>
+//                     </div>
+//                 </div>
+//                 </div>
+//                 `);
+//         const addNewBook = document.getElementById(myLibrary[i].title)
+//         addNewBook.appendChild(myTemplate)
+//         const addTitle = myTemplate.querySelector('.text-title-user')
+//         const addAuthor = myTemplate.querySelector('.text-author-user')
+//         const addPagecount = myTemplate.querySelector('.text-pagecount-user')
+//         const addRead = myTemplate.querySelector('.text-read-user')
+//         const addLiked = myTemplate.querySelector('.text-liked-user')
+//         addTitle.innerHTML = myLibrary[i].title
+//         addAuthor.innerHTML = myLibrary[i].author
+//         addPagecount.innerHTML = myLibrary[i].pageCount
+//         addRead.innerHTML = myLibrary[i].read
+//         addLiked.innerHTML = myLibrary[i].liked
+//         myLibrary[i].isDisplayed = true
+//         const btnRead = myTemplate.querySelector('.button-read')
+//         const btnLiked = myTemplate.querySelector('.button-liked')
+//         const btnDelete = myTemplate.querySelector('.button-delete')
+//         const assignIndex = myLibrary.indexOf(myLibrary[i])
+//         btnRead.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
+//         btnLiked.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
+//         btnDelete.setAttribute('id', myLibrary.indexOf(myLibrary[i]))
+//         btnDelete.addEventListener("click", () => {
+//             console.log("I was clicked!" + myLibrary[assignIndex].title)
+//             const deleteItem = document.querySelector('.card-body')
+//             const remakeBody = document.querySelector('.container')
+//             const newBody = document.createElement('div')
+//             remakeBody.appendChild(newBody)
+//             newBody.classList.add("card-body")
+//             myLibrary.splice(assignIndex)
+//             deleteItem.remove()
+//             for (i=0; i<myLibrary.length; i++) {
+//                 myLibrary[i].isDisplayed = false;
+//             }
+//             addTemplate()
+//         })
+//     }
+// }
 
 
 // const addBook = document.querySelector('.add-book');
@@ -308,67 +296,30 @@ function elementFromHtml(html) {
 // console.log(myLibrary[0]);
 // document.body.innerHTML = myLibrary[0].title;
 
+//{
+//     author: "JK Rowling",
+//     isDisplayed: false,
+//     liked: "No",
+//     pageCount: "350",
+//     read: "Yes",
+//     title: "Harry Potter",
+// },
+// {
+//     author: "JRR Tolkein",
+//     isDisplayed: false,
+//     liked: "No",
+//     pageCount: "350",
+//     read: "Yes",
+//     title: "Lord of the Rings",
+// },
+// {
+//     author: "Bronte",
+//     isDisplayed: false,
+//     liked: "No",
+//     pageCount: "350",
+//     read: "Yes",
+//     title: "Wuthering Heights",
+// }
+
 
 //UNUSED CODE END
-
-
-
-//DATA CLASSES AND STUFF
-
-//card | info, user-response, bottom-box | rest
-
-// ["info-title", "info-author", "info-pagecount", "info-read", "info-liked", "user-title", "user-author", "user-pagecount", "user-read", "user-liked", "button-box", "delete-box"]
-
-// const myTemplate = elementFromHtml(`
-// <div class="card">
-// <div class="info">
-//     <div class="info-title">
-//         <p class="text-title">Title:</p>
-//     </div>
-//     <div class="info-author">
-//         <p class="text-author">Author:</p>
-//     </div>
-//     <div class="info-pagecount">
-//         <p class="text-pagecount">Page count:</p>
-//     </div>
-//     <div class="info-read">
-//         <p class="text-read">Read?</p>
-//     </div>
-//     <div class="info-liked">
-//         <p class="text-liked">Liked?</p>
-//     </div>
-// </div>
-// <div class="user-response">
-//     <div class="user-title">
-//         <p class="text-title-user"></p>
-//     </div>
-//     <div class="user-author">
-//         <p class="text-author-user"></p>
-//     </div>
-//     <div class="user-pagecount">
-//         <p class="text-pagecount-user"></p>
-//     </div>
-//     <div class="user-read">
-//         <p class="text-read-user"></p>
-//     </div>
-//     <div class="user-liked">
-//         <p class="text-liked-user"></p>
-//     </div>
-// </div>
-// <div class="bottom-box">
-//     <div class="button-box">
-//         <p>Toggle</p>
-//         <button>Read</button>
-//         <button>Liked</button>
-//     </div>
-//     <div class="delete-box">
-//         <button>X</button>
-//     </div>
-// </div>
-// </div>
-// `);
-
-// testClass.appendChild(myTemplate);
-
-// const testHtml = myTemplate.querySelector('.text-title-user');
-// testHtml.innerHTML = "Hello world";
