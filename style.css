@@ -1,5 +1,5 @@
 h1 {
-  color: red;
+  color: #f8fafc;
 }
 
 .container {
@@ -11,16 +11,58 @@ h1 {
 }
 .container .sidebar {
   grid-area: sidebar;
-  background-color: lightblue;
+  background-color: #111827;
+  color: #f8fafc;
   padding: 5px;
 }
 .container .card-body {
   grid-area: body;
-  background-color: lightcoral;
+  background-color: #9ca3af;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(125px, 10rem));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 10rem));
 }
 .container .new-card {
-  background-color: white;
-  width: 15rem;
+  background-color: #f8fafc;
+  width: 20rem;
+  display: grid;
+  margin: 10px;
+  padding: 5px;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 3fr 1fr;
+  grid-template-areas: "title title title" "author author author" "pc pc pc" "read read read" "liked liked liked" "button1 button2 delete";
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  box-shadow: 2px 2px 5px #312e81;
+  border: 1px solid #312e81;
+  border-radius: 5px;
+}
+.container .new-card .card-title {
+  grid-area: title;
+}
+.container .new-card .card-author {
+  grid-area: author;
+}
+.container .new-card .card-pagecount {
+  grid-area: pc;
+}
+.container .new-card .card-read {
+  grid-area: read;
+}
+.container .new-card .card-liked {
+  grid-area: liked;
+}
+.container .new-card .toggle-read {
+  grid-area: button1;
+  align-self: center;
+}
+.container .new-card .toggle-liked {
+  grid-area: button2;
+  align-self: center;
+}
+.container .new-card .delete {
+  grid-area: delete;
+  align-self: end;
 }
 
 .modal {
@@ -32,7 +74,7 @@ h1 {
   border: 1px solid black;
   border-radius: 5px;
   z-index: 10;
-  background-color: white;
+  background-color: #f8fafc;
   width: 500px;
   max-width: 80%;
 }

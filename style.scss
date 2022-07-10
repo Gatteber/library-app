@@ -1,5 +1,11 @@
+$lightGrey: #f8fafc;
+$darkGrey: #111827;
+$mediumGrey: #9ca3af;
+$indigo: #312e81;
+
+
 h1 {
-    color: red;
+    color: $lightGrey;
 }
 
 .container {
@@ -14,18 +20,67 @@ h1 {
 
     .sidebar {
         grid-area: sidebar;
-        background-color: lightblue;
+        background-color: $darkGrey;
+        color: $lightGrey;
         padding: 5px;
     }
 
     .card-body {
         grid-area: body;
-        background-color: lightcoral;
+        background-color: $mediumGrey;
+        display: grid;
+        grid-template-rows: repeat(auto-fit, minmax(125px, 10rem));
+        grid-template-columns: repeat(auto-fit, minmax(350px, 10rem));
     }
 
     .new-card {
-        background-color: white;
-        width: 15rem;
+        background-color: $lightGrey;
+        width: 20rem;
+        display: grid;
+        margin: 10px;
+        padding: 5px;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 3fr 3fr 1fr;
+        grid-template-areas: 
+        "title title title"
+        "author author author"
+        "pc pc pc"
+        "read read read"
+        "liked liked liked"
+        "button1 button2 delete";
+        column-gap: 20px;
+        box-shadow: 2px 2px 5px $indigo;
+        border: 1px solid $indigo;
+        border-radius: 5px;
+
+        .card-title {
+            grid-area: title;
+        }
+        .card-author {
+            grid-area: author;
+        }
+        .card-pagecount {
+            grid-area: pc;
+        }
+        .card-read {
+            grid-area: read;
+        }
+        .card-liked {
+            grid-area: liked;
+        }
+        .toggle-read {
+            grid-area: button1;
+            align-self: center;
+        } 
+        .toggle-liked {
+            grid-area: button2;
+            align-self: center;
+        }
+        
+        .delete {
+            grid-area: delete;
+            align-self: end;
+        }
     }
 }
 
@@ -38,7 +93,7 @@ h1 {
     border: 1px solid black;
     border-radius: 5px;
     z-index: 10;
-    background-color: white;
+    background-color: $lightGrey;
     width: 500px;
     max-width: 80%;
 }

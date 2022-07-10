@@ -1,5 +1,102 @@
 
- let myLibrary = [];
+ let myLibrary = [
+    {
+        author: "JK Rowling",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Harry Potter",
+    },
+    {
+        author: "JRR Tolkein",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Lord of the Rings",
+    },
+    {
+        author: "Bronte",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Wuthering Heights",
+    },
+    {
+        author: "JK Rowling",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Harry Potter",
+    },
+    {
+        author: "JRR Tolkein",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Lord of the Rings",
+    },
+    {
+        author: "Bronte",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Wuthering Heights",
+    },
+    {
+        author: "JK Rowling",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Harry Potter",
+    },
+    {
+        author: "JRR Tolkein",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Lord of the Rings",
+    },
+    {
+        author: "Bronte",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Wuthering Heights",
+    },
+    {
+        author: "JK Rowling",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Harry Potter",
+    },
+    {
+        author: "JRR Tolkein",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Lord of the Rings",
+    },
+    {
+        author: "Bronte",
+        isDisplayed: false,
+        liked: "No",
+        pageCount: "350",
+        read: "Yes",
+        title: "Wuthering Heights",
+    }
+ ];
 
 //book constructor
 function Book(title, author, pageCount, read, liked) {
