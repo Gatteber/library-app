@@ -1,22 +1,45 @@
 
  let myLibrary = [];
 
-//book constructor
-function Book(title, author, pageCount, read, liked) {
-    this.title = title,
-    this.author = author,
-    this.pageCount = pageCount,
-    this.read = read,
-    this.liked = liked
+//book constructor -- unused in this branch
+// function Book(title, author, pageCount, read, liked) {
+//     this.title = title,
+//     this.author = author,
+//     this.pageCount = pageCount,
+//     this.read = read,
+//     this.liked = liked
+// }
+
+// Book.prototype.isRead = function() {
+//     return this.read
+// }
+
+// Book.prototype.isLiked = function() {
+//     return this.liked
+// }
+
+//class constructor
+class classBook {
+    //methods
+    constructor(title, author, pageCount, read, liked) {
+        this.title = title;
+        this.author = author;
+        this.pageCount = pageCount;
+        this.read = read;
+        this.liked = liked;
+    }
+
+    isRead() {
+        return this.read;
+    }
+
+    isLiked() {
+        return this.liked;
+    }
 }
 
-Book.prototype.isRead = function() {
-    return this.read
-}
 
-Book.prototype.isLiked = function() {
-    return this.liked
-}
+
 
 //modal open/close
 const openModalButtons = document.querySelectorAll ('[data-modal-target]');
@@ -62,7 +85,7 @@ getForm.addEventListener("submit", (event) => {
     const bookRead = document.getElementById('bookRead').value
     const bookLiked = document.getElementById('bookLiked').value
 
-    const createBook = new Book(bookTitle, bookAuthor, pageCount, bookRead, bookLiked)
+    const createBook = new classBook(bookTitle, bookAuthor, pageCount, bookRead, bookLiked)
     myLibrary.push(createBook)
 
     getForm.reset()
