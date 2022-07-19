@@ -10,6 +10,14 @@
 //     this.liked = liked
 // }
 
+// Book.prototype.isRead = function() {
+//     return this.read
+// }
+
+// Book.prototype.isLiked = function() {
+//     return this.liked
+// }
+
 //class constructor
 class classBook {
     //methods
@@ -30,13 +38,7 @@ class classBook {
     }
 }
 
-Book.prototype.isRead = function() {
-    return this.read
-}
 
-Book.prototype.isLiked = function() {
-    return this.liked
-}
 
 //modal open/close
 const openModalButtons = document.querySelectorAll ('[data-modal-target]');
